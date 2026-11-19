@@ -15,6 +15,17 @@
 4. 修改正在串流使用的服务前提醒用户；不要在有活动会话时随意重启。
 5. 任何"把端口对全网开放"的操作都要向用户说明风险。
 
+## 平台判断（先做这一步）
+
+| 目标主机 | 做法 |
+|---|---|
+| Linux（推荐） | 按本手册主流程 |
+| Windows 11 22H2+ | 先配 WSL2 mirrored 网络（`docs/windows.md` 方案 A），再按主流程 |
+| Windows 其他版本 | `windows/ps5-relay-win.py`（实验性，要求本机只有一个公网 IPv6） |
+| macOS | 未验证：pktinfo 常量与 Linux 不同，不要直接套用 |
+
+禁止用 `netsh interface portproxy`（只支持 TCP）、禁止用 nginx for Windows（需写死监听地址）。
+
 ## 执行步骤
 
 ### 0. 前置检查（必须全部满足）
