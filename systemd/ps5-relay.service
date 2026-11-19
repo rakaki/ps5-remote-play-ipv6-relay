@@ -1,0 +1,21 @@
+[Unit]
+Description=PS5 Remote Play IPv6 -> IPv4 port relay
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+Environment=PS5_IP=192.168.0.14
+Environment=UDP_IDLE=300
+ExecStart=/usr/bin/python3 /usr/local/bin/ps5-relay.py
+Restart=always
+RestartSec=3
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=full
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+
+[Install]
+WantedBy=multi-user.target
